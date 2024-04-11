@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class NewGameController : MonoBehaviour
 {
-    Animator animatorController;
     public GameObject statInputPrefab;
     private GameObject availablePoints;
     private Transform statsContainer; 
@@ -15,8 +14,39 @@ public class NewGameController : MonoBehaviour
     private Dictionary<string,string> fieldInputs = new Dictionary<string, string>
     {{"FirstName",null},{"LastName",null},{"Role",null}};
 
+    
+    public List<GameObject> screens;
+
+    private GameObject GetScreen(string name) {
+        return screens.First(x => x.gameObject.name == name);
+    }
+    private Dictionary<string,Dictionary<string,string>> navigationMap = new Dictionary<string,Dictionary<string,string>>
+    {
+        {
+            "Details", new Dictionary<string,string>
+            {
+                {"Back","Home"},
+                {"Next","Location"}
+            }
+        },
+        {
+            "Location", new Dictionary<string,string>
+            {
+                {"Back","Details"},
+                {"Next","Avatar"}
+            }
+        },
+        {
+            "Avatar", new Dictionary<string,string>
+            {
+                {"Back","Location"},
+                {"Next","Preview"}
+            }
+        }
+    };
+    
+
     public void Awake() {
-        animatorController = GetComponentInParent<Animator>();
         availablePoints = GameObject.Find("StatPoints");
         availablePoints.SetActive(false);
         statsContainer = GameObject.Find("Stats").GetComponent<Transform>();
@@ -101,13 +131,17 @@ public class NewGameController : MonoBehaviour
         UpdateAvailablePoints();
         fieldInputs["Role"] = roleName;
     }
-
-    public void Home() {
-        Debug.Log("Home");
-        GameManager.Instance().GetAnimatorController("MainMenu").Play("NewGameToHome");
-    }
     
+    public void Back(string section) {
+        string screen = navigationMap[section]["Back"];
+        Debug.Log("Back: "+screen);
+        GetScreen(section).SetActive(false);
+        GetScreen(screen).SetActive(true);
+    }
     public void Next(string section) {
-        Debug.Log("Next "+section);
+        string screen = navigationMap[section]["Next"];
+        Debug.Log("Next: "+screen);
+        GetScreen(section).SetActive(false);
+        GetScreen(screen).SetActive(true);
     }
 }

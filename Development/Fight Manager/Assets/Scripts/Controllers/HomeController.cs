@@ -1,8 +1,17 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class HomeController : MonoBehaviour
 {
+    public List<GameObject> screens;
+
+    private GameObject GetScreen(string name) {
+        return screens.First(x => x.gameObject.name == name);
+    }
+
     public void Awake() {
         if(GameManager.Instance().data.records.Count > 0) {
             Button resumeButton = GameObject.Find("Resume").GetComponent<Button>();
@@ -22,7 +31,8 @@ public class HomeController : MonoBehaviour
 
     public void NewGame() {
         Debug.Log("New Game");
-        GameManager.Instance().GetAnimatorController("MainMenu").Play("HomeToNewGame");
+        gameObject.SetActive(false);
+        GetScreen("New Game").SetActive(true);
     }
 
     public void LoadGame() {
