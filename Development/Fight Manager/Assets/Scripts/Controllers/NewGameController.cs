@@ -12,7 +12,7 @@ public class NewGameController : MonoBehaviour
 
     public List<InputField> inputComponents;
     private Dictionary<string,string> fieldInputs = new Dictionary<string, string>
-    {{"FirstName",null},{"LastName",null},{"Role",null}};
+    {{"firstName",null},{"lastName",null},{"role",null},{"location",null}};
 
     
     public List<GameObject> screens;
@@ -61,7 +61,6 @@ public class NewGameController : MonoBehaviour
         string value = inputField.text;
         Debug.Log(field + ": " + value);
         fieldInputs[field] = value;
-        ValidateInput();
     }
 
     private void ClearStats() {
@@ -105,23 +104,10 @@ public class NewGameController : MonoBehaviour
         return value;
     }
 
-    private void ValidateInput() {
-        if(fieldInputs.Values.Any(x => x == null)) {
-            Debug.Log("Details Still Required");
-            return;
-        }
-        if(StatPoints() > 0) {
-            Debug.Log("Points Require Allocation");
-            return;
-        }
-        GameObject.Find("Next").GetComponent<Button>().interactable = true;
-    }
-
     private void UpdateAvailablePoints() {
         availablePoints.SetActive(true);
         int value = StatPoints();
         availablePoints.transform.Find("Value").GetComponent<Text>().text = value.ToString();
-        ValidateInput();
     }
 
     public void SelectRole(string roleName) {
@@ -129,7 +115,7 @@ public class NewGameController : MonoBehaviour
         ClearStats();
         PopulateStats(role.Stats());
         UpdateAvailablePoints();
-        fieldInputs["Role"] = roleName;
+        fieldInputs["role"] = roleName;
     }
     
     public void Back(string section) {
