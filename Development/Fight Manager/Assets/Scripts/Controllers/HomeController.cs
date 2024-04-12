@@ -1,16 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class HomeController : MonoBehaviour
 {
-    public List<GameObject> screens;
-
-    private GameObject GetScreen(string name) {
-        return screens.First(x => x.gameObject.name == name);
-    }
+    public ScreenManager screenManager;
 
     public void Awake() {
         if(GameManager.Instance().data.records.Count > 0) {
@@ -32,7 +26,7 @@ public class HomeController : MonoBehaviour
     public void NewGame() {
         Debug.Log("New Game");
         gameObject.SetActive(false);
-        GetScreen("New Game").SetActive(true);
+        screenManager.GetScreenByName("New Game").SetActive(true);
     }
 
     public void LoadGame() {

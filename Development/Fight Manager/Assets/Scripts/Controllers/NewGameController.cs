@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +13,10 @@ public class NewGameController : MonoBehaviour
     {{"firstName",null},{"lastName",null},{"role",null},{"location",null}};
 
     
-    public List<GameObject> screens;
+    public ScreenManager screenManager;
+    private int currentScreenIndex;
 
-    private GameObject GetScreen(string name) {
-        return screens.First(x => x.gameObject.name == name);
-    }
+    
     private Dictionary<string,Dictionary<string,string>> navigationMap = new Dictionary<string,Dictionary<string,string>>
     {
         {
@@ -47,6 +44,7 @@ public class NewGameController : MonoBehaviour
     
 
     public void Awake() {
+        currentScreenIndex = 1;
         availablePoints = GameObject.Find("StatPoints");
         availablePoints.SetActive(false);
         statsContainer = GameObject.Find("Stats").GetComponent<Transform>();
@@ -118,16 +116,22 @@ public class NewGameController : MonoBehaviour
         fieldInputs["role"] = roleName;
     }
     
-    public void Back(string section) {
-        string screen = navigationMap[section]["Back"];
-        Debug.Log("Back: "+screen);
-        GetScreen(section).SetActive(false);
-        GetScreen(screen).SetActive(true);
+    public void Back() {
+        Debug.Log("Back");
+        Debug.Log("Current Index: "+currentScreenIndex);
+        screenManager.GetScreenByIndex(currentScreenIndex).SetActive(false);
+        currentScreenIndex -= 1;
+        Debug.Log("New Index: "+currentScreenIndex);
+        GameObject screen = screenManager.GetScreenByIndex(currentScreenIndex);
+        if(screen.name == "Home"){ gameObject.SetActive(false);}
+        screen.SetActive(true);
     }
-    public void Next(string section) {
-        string screen = navigationMap[section]["Next"];
-        Debug.Log("Next: "+screen);
-        GetScreen(section).SetActive(false);
-        GetScreen(screen).SetActive(true);
+    public void Next() {
+        Debug.Log("Next");
+        Debug.Log("Current Index: "+currentScreenIndex);
+        screenManager.GetScreenByIndex(currentScreenIndex).SetActive(false);
+        currentScreenIndex += 1;
+        Debug.Log("New Index: "+currentScreenIndex);
+        screenManager.GetScreenByIndex(currentScreenIndex).SetActive(true);
     }
 }
