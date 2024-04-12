@@ -5,17 +5,12 @@ using UnityEngine.UI;
 public class HomeController : MonoBehaviour
 {
     public ScreenManager screenManager;
+    public ButtonManager buttonManager;
 
     public void Awake() {
-        if(GameManager.Instance().data.records.Count > 0) {
-            Button resumeButton = GameObject.Find("Resume").GetComponent<Button>();
-            if(resumeButton) {
-                resumeButton.interactable = true;
-            }
-            Button loadButton = GameObject.Find("Load Game").GetComponent<Button>();
-            if(resumeButton) {
-                loadButton.interactable = true;
-            }
+        if(GameManager.Instance().data.records.Count == 0) {
+            buttonManager.GetButtonByName("Resume").GetComponent<Button>().interactable = false;
+            buttonManager.GetButtonByName("Load Game").GetComponent<Button>().interactable = false;
         }
     }
 
