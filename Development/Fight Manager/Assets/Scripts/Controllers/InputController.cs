@@ -8,6 +8,9 @@ public class InputController : MonoBehaviour
     private Dropdown dropdown;
 
     private string value;
+    public string GetValue() {
+        return value;
+    }
     public void Input() {
         switch(type) {
             case "InputField":

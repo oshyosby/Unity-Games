@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 37918762}
   - component: {fileID: 37918761}
   m_Layer: 5
-  m_Name: Next
+  m_Name: Submit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,8 +208,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1225803689}
         m_TargetAssemblyTypeName: NewGameController, Assembly-CSharp
-        m_MethodName: Next
-        m_Mode: 5
+        m_MethodName: Submit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2780,7 +2780,9 @@ MonoBehaviour:
   statInputPrefab: {fileID: 4156250323569569907, guid: 89b5e4fe972c85b44b415421632be881, type: 3}
   inputs: []
   screenManager:
-    screens: []
+    screens:
+    - {fileID: 1715569374}
+    - {fileID: 1225803684}
 --- !u!1 &1276764386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,7 +2932,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next
+  m_Text: Submit
 --- !u!222 &1320003374
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3504,8 +3506,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1225803689}
         m_TargetAssemblyTypeName: NewGameController, Assembly-CSharp
-        m_MethodName: Back
-        m_Mode: 5
+        m_MethodName: Home
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3831,7 +3833,7 @@ GameObject:
   - component: {fileID: 1890113697}
   - component: {fileID: 1890113700}
   m_Layer: 5
-  m_Name: Location
+  m_Name: location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

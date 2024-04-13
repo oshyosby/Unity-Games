@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class NewGameController : MonoBehaviour
     private Transform statsContainer; 
 
     public List<InputController> inputs;
+    private InputController GetInputByName(string name) {
+        return inputs.First(x => x.name == name);
+    }
     public ScreenManager screenManager;
 
     private int StatPoints() {
@@ -18,7 +22,8 @@ public class NewGameController : MonoBehaviour
         int used = 0;
         for(int i=0; i<statsContainer.childCount; i++) {
             int statInput;
-            if(!int.TryParse(statsContainer.GetChild(i).Find("Value").Find("Input").GetComponent<Text>().text, out statInput)) {
+            string statName = statsContainer.GetChild(i).name;
+            if(!int.TryParse(statsContainer.GetChild(i).Find(statName).Find("Input").GetComponent<Text>().text, out statInput)) {
                 statInput = 0;
             }
             Debug.Log("Input:"+statInput);
@@ -47,6 +52,7 @@ public class NewGameController : MonoBehaviour
                 Debug.Log("InputField component found.");
                 inputField.onEndEdit.AddListener(delegate { UpdateAvailablePoints(); });
                 Debug.Log("Event listener added to InputField.");
+                statInput.transform.Find("Value").name = statInput.name;
             } else {
                 Debug.Log("Input not Found");
             } 
@@ -56,8 +62,44 @@ public class NewGameController : MonoBehaviour
     public void Awake() {
         availablePoints = GameObject.Find("StatPoints");
         statsContainer = GameObject.Find("Stats").GetComponent<Transform>();
-        inputs = gameObject.GetComponentsInChildren<InputController>().ToList();
         PopulateStats();
         UpdateAvailablePoints();
+        inputs = gameObject.GetComponentsInChildren<InputController>().ToList();
+    }
+
+    public List<Stat> GetStats() {
+        List<Stat> stats = new List<Stat>();
+        List<InputController> inputs = statsContainer.GetComponentsInChildren<InputController>().ToList();
+        if(inputs.Count > 0) {
+            foreach(InputController input in inputs) {
+                Debug.Log("Input Name: "+input.name);
+                Debug.Log("Input Value: "+input.GetValue());
+                Stat stat = new Stat(
+                    input.name,
+                    "Coach",
+                    int.Parse(input.GetValue())
+                );
+                stats.Add(stat);
+            }
+        }
+        return stats;
+    }
+
+    public void Home() {
+        Debug.Log("Home");
+        gameObject.SetActive(false);
+        screenManager.GetScreenByName("Home").SetActive(true);
+    }
+
+    public void Submit() {
+        Debug.Log("Submit");
+        Person newPerson = new Person(
+            GetInputByName("firstName").GetValue(),
+            GetInputByName("lastName").GetValue(),
+            GetInputByName("location").GetValue(),
+            "Coach",
+            GetStats()
+        );
+        Debug.Log("New Person Id: "+newPerson.id);
     }
 }
