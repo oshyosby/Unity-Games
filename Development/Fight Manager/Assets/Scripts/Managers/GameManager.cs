@@ -15,9 +15,17 @@ public class GameManager : MonoBehaviour
         instance = this; 
     }
 
+    public Person player;
     public DataManager data;
+    public List<SaveManager> saves;
+    public void Save(string name) {
+        saves.Add(
+            new SaveManager(name,player,data)
+        );
+    }
 
     public GameManager() {
         data = new DataManager();
+        saves = new List<SaveManager>();
     }
 }

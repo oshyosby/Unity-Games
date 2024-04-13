@@ -8,8 +8,10 @@ public class HomeController : MonoBehaviour
     public ButtonManager buttonManager;
 
     public void Awake() {
-        if(GameManager.Instance().data.records.Count == 0) {
+        if(GameManager.Instance().player.id == null) {
             buttonManager.GetButtonByName("Resume").GetComponent<Button>().interactable = false;
+        }
+        if(GameManager.Instance().saves.Count == 0) {
             buttonManager.GetButtonByName("Load Game").GetComponent<Button>().interactable = false;
         }
     }

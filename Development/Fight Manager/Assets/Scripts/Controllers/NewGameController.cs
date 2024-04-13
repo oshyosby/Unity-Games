@@ -93,13 +93,14 @@ public class NewGameController : MonoBehaviour
 
     public void Submit() {
         Debug.Log("Submit");
-        Person newPerson = new Person(
+        GameManager.Instance().player = new Person(
             GetInputByName("firstName").GetValue(),
             GetInputByName("lastName").GetValue(),
             GetInputByName("location").GetValue(),
             "Coach",
             GetStats()
         );
-        Debug.Log("New Person Id: "+newPerson.id);
+        Debug.Log("New Person Id: "+GameManager.Instance().player.id);
+        GameManager.Instance().Save(GameManager.Instance().player.name);
     }
 }
