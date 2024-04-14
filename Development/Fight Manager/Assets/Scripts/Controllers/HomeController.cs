@@ -18,6 +18,7 @@ public class HomeController : MonoBehaviour
 
     public void Resume() {
         Debug.Log("Resume");
+        GameManager.LoadScene("Game");
     }
 
     public void NewGame() {

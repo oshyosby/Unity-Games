@@ -1,22 +1,30 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance() {
-        if (instance == null) {
-        }
         return instance;
     }
 
-    void Awake() {
-        GameManager.instance = this;
-        if(saves.Count > 0) {
-            Load(saves[0]);
+    void Awake()
+    {
+        if (instance != this)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            if(saves.Count > 0) {
+                LoadSave(saves[0]);
+            }
         }
-    }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }   
 
     public SaveManager currentSave = null;
     public List<SaveManager> saves;
@@ -29,7 +37,12 @@ public class GameManager : MonoBehaviour
             )
         );
     }
-    public void Load(SaveManager save) {
+    public void LoadSave(SaveManager save) {
         currentSave = save;
+    }
+
+    public static void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

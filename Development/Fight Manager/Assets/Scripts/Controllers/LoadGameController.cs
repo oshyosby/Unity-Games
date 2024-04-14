@@ -46,5 +46,7 @@ public class LoadGameController : MonoBehaviour
 
     public void Load() {
         Debug.Log("Load");
+        GameManager.Instance().LoadSave(selectedSave);
+        GameManager.LoadScene("Game");
     }
 }

@@ -102,5 +102,6 @@ public class NewGameController : MonoBehaviour
         );
         Debug.Log("New Person Id: "+GameManager.Instance().currentSave.player.id);
         GameManager.Instance().Save(GameManager.Instance().currentSave.player.name);
+        GameManager.LoadScene("Game");
     }
 }
