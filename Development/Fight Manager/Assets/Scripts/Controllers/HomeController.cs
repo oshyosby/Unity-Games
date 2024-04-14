@@ -8,7 +8,7 @@ public class HomeController : MonoBehaviour
     public ButtonManager buttonManager;
 
     void Awake() {
-        if(GameManager.Instance().currentSave == null) {
+        if(GameManager.Instance().currentSave.player.id == null) {
             buttonManager.GetButtonByName("Resume").GetComponent<Button>().interactable = false;
         }
         if(GameManager.Instance().saves.Count == 0) {

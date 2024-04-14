@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             if(saves.Count > 0) {
-                LoadSave(saves[0]);
+                LoadSave(saves.OrderByDescending(x => x.lastModifiedDate).ToArray()[0]);
             }
         }
         else
@@ -29,13 +30,19 @@ public class GameManager : MonoBehaviour
     public SaveManager currentSave = null;
     public List<SaveManager> saves;
     public void Save(string name) {
-        saves.Add(
-            new SaveManager(
-                name,
-                currentSave.player,
-                currentSave.data
-            )
-        );
+        SaveManager existingSave = saves.FirstOrDefault(x => x.name == name);
+        if(existingSave == null) {
+            saves.Add(
+                new SaveManager(
+                    name,
+                    currentSave.player,
+                    currentSave.data
+                )
+            );
+        } else {
+            existingSave = currentSave;
+            existingSave.lastModifiedDate = DateTime.Now;
+        }
     }
     public void LoadSave(SaveManager save) {
         currentSave = save;

@@ -93,9 +93,11 @@ public class NewGameController : MonoBehaviour
 
     public void Submit() {
         Debug.Log("Submit");
+        string firstName = GetInputByName("firstName").GetValue();
+        string lastName = GetInputByName("lastName").GetValue();
+        GameManager.Instance().currentSave = new SaveManager(firstName+" "+lastName);
         GameManager.Instance().currentSave.player = new Person(
-            GetInputByName("firstName").GetValue(),
-            GetInputByName("lastName").GetValue(),
+            firstName, lastName,
             GetInputByName("location").GetValue(),
             "Coach",
             GetStats()

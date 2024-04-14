@@ -2895,39 +2895,7 @@ MonoBehaviour:
       stats: []
     data:
       people: []
-  saves:
-  - name: Test Save 1
-    player:
-      firstName: Oscar
-      lastName: Shanagher
-      location: West
-      roles:
-      - Coach
-      stats: []
-    data:
-      people:
-      - firstName: Test
-        lastName: test
-        location: test
-        roles:
-        - Fighter
-        stats: []
-  - name: Test Save 2
-    player:
-      firstName: Oscar
-      lastName: Shanagher
-      location: West
-      roles:
-      - Coach
-      stats: []
-    data:
-      people:
-      - firstName: Test
-        lastName: test
-        location: test
-        roles:
-        - Fighter
-        stats: []
+  saves: []
 --- !u!4 &1219922227
 Transform:
   m_ObjectHideFlags: 0
