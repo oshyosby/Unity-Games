@@ -27,7 +27,7 @@ public class InputController : MonoBehaviour
         Debug.Log("Value: "+value);
     }
 
-    public void Awake() {
+    void Awake() {
         inputField = GetComponent<InputField>();
         dropdown = GetComponent<Dropdown>();
 

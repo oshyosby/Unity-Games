@@ -7,8 +7,8 @@ public class HomeController : MonoBehaviour
     public ScreenManager screenManager;
     public ButtonManager buttonManager;
 
-    public void Awake() {
-        if(GameManager.Instance().player.id == null) {
+    void Awake() {
+        if(GameManager.Instance().currentSave == null) {
             buttonManager.GetButtonByName("Resume").GetComponent<Button>().interactable = false;
         }
         if(GameManager.Instance().saves.Count == 0) {
@@ -28,6 +28,8 @@ public class HomeController : MonoBehaviour
 
     public void LoadGame() {
         Debug.Log("Load Game");
+        gameObject.SetActive(false);
+        screenManager.GetScreenByName("Load Game").SetActive(true);
     }
 
     public void Settings() {

@@ -59,7 +59,7 @@ public class NewGameController : MonoBehaviour
         }
     }
 
-    public void Awake() {
+    void Awake() {
         availablePoints = GameObject.Find("StatPoints");
         statsContainer = GameObject.Find("Stats").GetComponent<Transform>();
         PopulateStats();
@@ -93,14 +93,14 @@ public class NewGameController : MonoBehaviour
 
     public void Submit() {
         Debug.Log("Submit");
-        GameManager.Instance().player = new Person(
+        GameManager.Instance().currentSave.player = new Person(
             GetInputByName("firstName").GetValue(),
             GetInputByName("lastName").GetValue(),
             GetInputByName("location").GetValue(),
             "Coach",
             GetStats()
         );
-        Debug.Log("New Person Id: "+GameManager.Instance().player.id);
-        GameManager.Instance().Save(GameManager.Instance().player.name);
+        Debug.Log("New Person Id: "+GameManager.Instance().currentSave.player.id);
+        GameManager.Instance().Save(GameManager.Instance().currentSave.player.name);
     }
 }

@@ -11,21 +11,25 @@ public class GameManager : MonoBehaviour
         return instance;
     }
 
-    private void Awake() {
-        instance = this; 
+    void Awake() {
+        GameManager.instance = this;
+        if(saves.Count > 0) {
+            Load(saves[0]);
+        }
     }
 
-    public Person player;
-    public DataManager data;
+    public SaveManager currentSave = null;
     public List<SaveManager> saves;
     public void Save(string name) {
         saves.Add(
-            new SaveManager(name,player,data)
+            new SaveManager(
+                name,
+                currentSave.player,
+                currentSave.data
+            )
         );
     }
-
-    public GameManager() {
-        data = new DataManager();
-        saves = new List<SaveManager>();
+    public void Load(SaveManager save) {
+        currentSave = save;
     }
 }

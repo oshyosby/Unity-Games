@@ -24,13 +24,13 @@ public class Person : Record {
     public List<Stat> stats;
 
     public Person(string firstName, string lastName, string location, string role, List<Stat> stats) {
-        id = GameManager.Instance().data.GetUniqueId("person",new List<Record>(GameManager.Instance().data.people));
+        id = GameManager.Instance().currentSave.data.GetUniqueId("person",new List<Record>(GameManager.Instance().currentSave.data.people));
         name = firstName+" "+lastName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.location = location;
         roles = new List<string>{role};
         this.stats = stats;
-        GameManager.Instance().data.people.Add(this);
+        GameManager.Instance().currentSave.data.people.Add(this);
     }
 }
