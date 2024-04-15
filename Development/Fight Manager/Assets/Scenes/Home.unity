@@ -2885,6 +2885,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b16b364c6556384ba3d84e7b377a373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+    firstName: 
+    lastName: 
+    location: 
+    roles: []
+    stats: []
+  data:
+    people: []
   currentSave:
     name: 
     player:
@@ -2895,7 +2903,16 @@ MonoBehaviour:
       stats: []
     data:
       people: []
-  saves: []
+  saves:
+  - name: Test
+    player:
+      firstName: test
+      lastName: test
+      location: west
+      roles: []
+      stats: []
+    data:
+      people: []
 --- !u!4 &1219922227
 Transform:
   m_ObjectHideFlags: 0
@@ -4561,7 +4578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 59.999985, y: -20}
+  m_AnchoredPosition: {x: 60, y: -20}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1890673703

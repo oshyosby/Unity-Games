@@ -93,17 +93,17 @@ public class NewGameController : MonoBehaviour
 
     public void Submit() {
         Debug.Log("Submit");
-        string firstName = GetInputByName("firstName").GetValue();
-        string lastName = GetInputByName("lastName").GetValue();
-        GameManager.Instance().currentSave = new SaveManager(firstName+" "+lastName);
-        GameManager.Instance().currentSave.player = new Person(
-            firstName, lastName,
+        Person player = new Person(
+            GetInputByName("firstName").GetValue(),
+            GetInputByName("lastName").GetValue(),
             GetInputByName("location").GetValue(),
             "Coach",
             GetStats()
         );
-        Debug.Log("New Person Id: "+GameManager.Instance().currentSave.player.id);
-        GameManager.Instance().Save(GameManager.Instance().currentSave.player.name);
+        player.Push();
+        Debug.Log("New Person Id: "+player.id);
+        GameManager.Instance().playerManager.player = player;
+        GameManager.Instance().Save(player.FullName());
         GameManager.LoadScene("Game");
     }
 }

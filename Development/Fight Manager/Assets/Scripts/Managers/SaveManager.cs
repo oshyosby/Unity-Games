@@ -14,14 +14,15 @@ public class SaveManager {
     [SerializeField]
     public DateTime lastModifiedDate;
 
-    public SaveManager(string name) {
+    public SaveManager(string name, PlayerManager playerManager) {
         this.name = name;
-        createdDate = DateTime.Now;
-        lastModifiedDate = createdDate;
+        this.player = playerManager.player;
+        this.data = playerManager.dataManager;
     }
-    public SaveManager(string name, Person player, DataManager data) {
-        this.name = name;
-        this.player = player;
-        this.data = data;
+
+    public void Update(PlayerManager playerManager) {
+        player = playerManager.player;
+        data = playerManager.dataManager;
+        lastModifiedDate = DateTime.Now;
     }
 }

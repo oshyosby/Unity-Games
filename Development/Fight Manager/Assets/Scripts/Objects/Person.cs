@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Person : Record {
+public class Person {
 
     [SerializeField]
-    public string id {get; set;}
-    [SerializeField]
-    public string name {get; set;}
+    public string id;
     [SerializeField]
     public string firstName;
     [SerializeField]
     public string lastName;
     public string FullName() {
-        return firstName+ " "+lastName;
+        return firstName + " " + lastName;
     }
     [SerializeField]
     public string location;
@@ -22,15 +20,29 @@ public class Person : Record {
     public List<string> roles;
     [SerializeField]
     public List<Stat> stats;
+    public Record recordVersion;
+
+    public void PrepareRecord() {
+        Dictionary<string,object> data = new Dictionary<string,object>{
+            {"firstName",firstName},{"lastName",lastName},{"location",location},
+            {"roles",roles},{"stats",stats}
+        };
+        Record record = new Record(FullName(),"person",data);
+        record.id = id;
+        recordVersion = record;
+    }
 
     public Person(string firstName, string lastName, string location, string role, List<Stat> stats) {
-        id = GameManager.Instance().currentSave.data.GetUniqueId("person",new List<Record>(GameManager.Instance().currentSave.data.people));
-        name = firstName+" "+lastName;
+        id = "undefined";
         this.firstName = firstName;
         this.lastName = lastName;
         this.location = location;
         roles = new List<string>{role};
-        this.stats = stats;
-        GameManager.Instance().currentSave.data.people.Add(this);
+        this.stats = stats;   
+        PrepareRecord();
+    }
+
+    public void Push() {
+        GameManager.Instance().DataManager().Add(recordVersion);
     }
 }

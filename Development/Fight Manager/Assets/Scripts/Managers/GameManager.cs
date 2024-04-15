@@ -26,26 +26,28 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }   
+    public PlayerManager playerManager;
+    public DataManager DataManager() {
+        return playerManager.dataManager;
+    }
 
     public SaveManager currentSave = null;
     public List<SaveManager> saves;
     public void Save(string name) {
         SaveManager existingSave = saves.FirstOrDefault(x => x.name == name);
         if(existingSave == null) {
-            saves.Add(
-                new SaveManager(
-                    name,
-                    currentSave.player,
-                    currentSave.data
-                )
-            );
+            SaveManager newSave = new SaveManager(name,playerManager);
+            saves.Add(newSave);
+            currentSave = newSave;
         } else {
-            existingSave = currentSave;
-            existingSave.lastModifiedDate = DateTime.Now;
+            existingSave.Update(playerManager);
+            currentSave = existingSave;
         }
+
     }
     public void LoadSave(SaveManager save) {
         currentSave = save;
+        playerManager.LoadSave(save);
     }
 
     public static void LoadScene(string sceneName)
