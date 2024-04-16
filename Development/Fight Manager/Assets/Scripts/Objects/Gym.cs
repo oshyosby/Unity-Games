@@ -6,22 +6,36 @@ public class Gym {
     public string ownerId;
     public Record recordVersion;
 
-    public void PrepareRecord() {
+    public Record RecordVersion() {
         Dictionary<string,object> data = new Dictionary<string,object>{
             {"name",name},{"ownerId",ownerId}
         };
         Record record = new Record(name,"gym",data);
         record.id = id;
-        recordVersion = record;
+        return record;
     }
 
-    public Gym(string name, Person owner) {
+    public static Gym Get(Record record) {
+        if(record.type != "gym") {
+            return null;
+        } else {
+            Gym gym = new Gym(
+                record.name,
+                (string)record.data["ownerId"]
+            );
+            gym.id = record.id;
+            return gym;
+        }
+    } 
+
+    public Gym(string name, string ownerId) {
         this.name = name;
-        ownerId = owner.id;
-        PrepareRecord();
+        this.ownerId = ownerId;
     }
 
     public void Push() {
-        GameManager.Instance().DataManager().Add(recordVersion);
+        Record record = RecordVersion();
+        GameManager.Instance().DataManager().Add(record);
+        id = record.id;
     }
 }

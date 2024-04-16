@@ -101,7 +101,8 @@ public class NewGameController : MonoBehaviour
             GetStats()
         );
         player.Push();
-        Debug.Log("New Person Id: "+player.id);
+        Gym gym = new Gym("Test Gym Creation",player.id);
+        gym.Push();
         GameManager.Instance().playerManager.player = player;
         GameManager.Instance().Save(player.FullName());
         GameManager.LoadScene("Game");

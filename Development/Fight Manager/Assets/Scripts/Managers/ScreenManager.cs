@@ -7,6 +7,7 @@ using UnityEngine;
 public class ScreenManager {
     [SerializeField]
     public List<GameObject> screens;
+    public string currentScreenName;
 
     public GameObject GetScreenByName(string name) {
         GameObject screen = screens.First(x => x.gameObject.name == name);

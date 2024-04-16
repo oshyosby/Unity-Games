@@ -22,15 +22,31 @@ public class Person {
     public List<Stat> stats;
     public Record recordVersion;
 
-    public void PrepareRecord() {
+    public Record RecordVersion() {
         Dictionary<string,object> data = new Dictionary<string,object>{
             {"firstName",firstName},{"lastName",lastName},{"location",location},
             {"roles",roles},{"stats",stats}
         };
         Record record = new Record(FullName(),"person",data);
         record.id = id;
-        recordVersion = record;
+        return record;
     }
+
+    public static Person Get(Record record) {
+        if(record.type != "person") {
+            return null;
+        } else {
+            Person person = new Person(
+                (string)record.data["firstName"],
+                (string)record.data["lastName"],
+                (string)record.data["location"],
+                (string)record.data["role"],
+                (List<Stat>)record.data["stats"]
+            );
+            person.id = record.id;
+            return person;
+        }
+    } 
 
     public Person(string firstName, string lastName, string location, string role, List<Stat> stats) {
         id = "undefined";
@@ -39,10 +55,11 @@ public class Person {
         this.location = location;
         roles = new List<string>{role};
         this.stats = stats;   
-        PrepareRecord();
     }
 
     public void Push() {
-        GameManager.Instance().DataManager().Add(recordVersion);
+        Record record = RecordVersion();
+        GameManager.Instance().DataManager().Add(record);
+        id = record.id;
     }
 }

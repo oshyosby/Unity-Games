@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }   
-    public PlayerManager playerManager;
+    public PlayerManager playerManager = new PlayerManager();
     public DataManager DataManager() {
         return playerManager.dataManager;
     }

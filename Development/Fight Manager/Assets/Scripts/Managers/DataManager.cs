@@ -8,21 +8,31 @@ public class DataManager {
     
     public List<Record> records = new List<Record>();
 
-    private string GenerateId() {
-        return Guid.NewGuid().ToString();
+    public List<Record> RecordsByType(string type) {
+        return records.Where(x => x.type == type).ToList();
     }
-    private string PrefixId(string id, string prefix) {
-        return prefix + id.Substring(prefix.Length-1);
+    public Record GetRecordById(string id) {
+        return records.First(x => x.id == id);
     }
-    public string GetUniqueId(string idPrefix) {
-        string id = PrefixId(GenerateId(),idPrefix);
-        while(records.Any(x => x.id == id)) {
-            id = PrefixId(GenerateId(),idPrefix);
+    public Record RecordDataQuery(List<Record> records, string field, object value) {
+        return records.First(x => x.data[field] == value);
+    }
+
+    private void GenerateId(Record record) {
+        record.id = Guid.NewGuid().ToString();
+        record.id = record.type + record.id.Substring(record.type.Length+1);
+    }
+    public void GetUniqueId(Record record) {
+        GenerateId(record);
+        while(records.Any(x => x.id == record.id)) {
+            GenerateId(record);
         }
-        return id;
     }
     public void Add(Record record) {
-        record.id = record.id == null || record.id == "undefined" ? GetUniqueId(record.type) : record.id;
+        if(record.id == null || record.id == "undefined") {
+            GetUniqueId(record);
+        }
+        Debug.Log("Record Id: "+record.id);
         records.Add(record);
     }
 }

@@ -2885,34 +2885,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b16b364c6556384ba3d84e7b377a373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    firstName: 
-    lastName: 
-    location: 
-    roles: []
-    stats: []
-  data:
-    people: []
   currentSave:
     name: 
     player:
+      id: 
       firstName: 
       lastName: 
       location: 
       roles: []
       stats: []
-    data:
-      people: []
   saves:
   - name: Test
     player:
+      id: 
       firstName: test
       lastName: test
       location: west
       roles: []
       stats: []
-    data:
-      people: []
 --- !u!4 &1219922227
 Transform:
   m_ObjectHideFlags: 0
@@ -3647,13 +3637,12 @@ MonoBehaviour:
   selectedSave:
     name: 
     player:
+      id: 
       firstName: 
       lastName: 
       location: 
       roles: []
       stats: []
-    data:
-      people: []
 --- !u!114 &1381840605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4299,7 +4288,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1715569374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb2da530e7f7f5a44b987e2f50fbcf7d, type: 3}
+  m_Script: {fileID: 11500000, guid: 109518f0698d05843966686297c79d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   screenManager:
