@@ -20,7 +20,6 @@ public class Person {
     public List<string> roles;
     [SerializeField]
     public List<Stat> stats;
-    public Record recordVersion;
 
     public Record RecordVersion() {
         Dictionary<string,object> data = new Dictionary<string,object>{
