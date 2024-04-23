@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class GymController : MonoBehaviour
 {
-    public DataRecord gym;
+    public ObjectRecord gym;
 
-    public void Populate(DataRecord gym) {
+    public void Populate(ObjectRecord gym) {
         this.gym = gym;
         GameObject.Find("Name").GetComponent<Text>().text = gym.Name();
     }

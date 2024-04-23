@@ -101,17 +101,19 @@ public class NewGameController : MonoBehaviour
             //{"stats",GetStats()}
         };
         string name = personFields["firstName"]+" "+personFields["lastName"];
-        DataRecord player = new DataRecord(
+        ObjectRecord player = new ObjectRecord(
             name,
             "individual",
             personFields
         );
         player.Push();
-        Dictionary<string,object> orgnaisationFields = new Dictionary<string,object>{
-            {"ownerId",player.Id()}
-        };
-        DataRecord gym = new DataRecord("Test Gym Creation","organisation",orgnaisationFields);
+        ObjectRecord gym = new ObjectRecord("Test Gym Creation","organisation",new Dictionary<string,object>());
         gym.Push();
+        Dictionary<string,object> affiliationFields = new Dictionary<string,object>{
+            {"individualId",player.Id()},{"orgnaisationId",gym.Id()}
+        };
+        ObjectRecord affiliation = new ObjectRecord("Affiliation","affiliation",affiliationFields);
+        affiliation.Push();
         GameManager.Instance().playerManager.player = player;
         GameManager.Instance().Save(player.Name());
         GameManager.LoadScene("Game");

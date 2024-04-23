@@ -6,7 +6,7 @@ public class SaveManager {
     [SerializeField]
     public string name;
     [SerializeField]
-    public DataRecord player;
+    public ObjectRecord player;
     [SerializeField]
     public DataManager data = new DataManager();
     [SerializeField]

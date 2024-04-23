@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [Serializable]
-public class DataRecord {
+public class ObjectRecord {
     [SerializeField]
     private Dictionary<string,object> properties = new Dictionary<string,object>{
         {"fields",new Dictionary<string,object>()}
@@ -12,7 +12,7 @@ public class DataRecord {
 
     private void SetDefaultFields(string dataObject) {
         Dictionary<string,object> fields = new Dictionary<string,object>();
-        foreach (DataField field in GameManager.Instance().DataManager().ObjectByName(dataObject).Fields()) {
+        foreach (ObjectField field in GameManager.Instance().DataManager().ObjectByName(dataObject).Fields()) {
             fields.Add(field.Name(),field.DefaultValue());
         }
         properties["fields"] = fields;
@@ -28,6 +28,7 @@ public class DataRecord {
         Fields()[fieldName] = value;
     }
 
+    [SerializeField]
     public string Id() {
         return (string)GetField("id");
     }
@@ -38,7 +39,7 @@ public class DataRecord {
         return (DataObject)GameManager.Instance().DataManager().ObjectByName((string)GetField("dataObject"));
     }
 
-    public DataRecord(string name, string dataObject, Dictionary<string,object> fields) {
+    public ObjectRecord(string name, string dataObject, Dictionary<string,object> fields) {
         SetDefaultFields(dataObject);
         Fields()["name"] = name;
         Fields()["dataObject"] = dataObject;

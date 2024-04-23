@@ -5,19 +5,19 @@ using UnityEngine;
 
 [Serializable]
 public class PlayerManager {
-    public DataRecord player;
+    public ObjectRecord player;
     [SerializeField]
     public DataManager dataManager = new DataManager();
 
-    public DataRecord MyGym() {
-        DataRecord record = dataManager.RecordDataQuery("organisation","ownerId",player.Id()); 
+    public ObjectRecord MyGym() {
+        ObjectRecord record = dataManager.RecordDataQuery("organisation","ownerId",player.Id()); 
         Debug.Log("My Gym Id: "+record.Id());
         return record;
     }
 
     public PlayerManager() {}
 
-    public PlayerManager(DataRecord player, DataManager dataManager) {
+    public PlayerManager(ObjectRecord player, DataManager dataManager) {
         this.player = player;
         this.dataManager = dataManager;
     }

@@ -4,17 +4,17 @@ using System.Linq;
 
 [Serializable]
 public class DataObject {
-    private static List<DataField> DefaultFields() {
-        return new List<DataField>{
-        DataField.String("id","Record Id",true,(string)("")),
-        DataField.String("name","Record Name",true,(string)("")),
-        DataField.String("dataObject","Data Object",true,(string)(""))
+    private static List<ObjectField> DefaultFields() {
+        return new List<ObjectField>{
+        ObjectField.String("id","Record Id",true,(string)("")),
+        ObjectField.String("name","Record Name",true,(string)("")),
+        ObjectField.String("dataObject","Data Object",true,(string)(""))
     };
     }
     private Dictionary<string,object> properties = new Dictionary<string, object>{
         {"name",(string)("")},{"label",(string)("")},
-        {"fields",new List<DataField>()}
-        //{"relatedLists",new List<RelatedList>()}
+        {"fields",new List<ObjectField>()}
+        //{"relatedLists",new List<RelatedRecords>()}
     };
 
     public string Name() {
@@ -23,22 +23,22 @@ public class DataObject {
     public string Label() {
         return (string)properties["label"];
     }
-    public List<DataField> Fields() {
-        return (List<DataField>)properties["fields"];
+    public List<ObjectField> Fields() {
+        return (List<ObjectField>)properties["fields"];
     }
-    public void AddFields(List<DataField> fields) {
+    public void AddFields(List<ObjectField> fields) {
         Fields().AddRange(fields);
     }
     /*
-    public List<RelatedList> RelatedLists() {
-        return (List<RelatedList>)properties["relatedLists"];
+    public List<RelatedRecords> RelatedRecordss() {
+        return (List<RelatedRecords>)properties["relatedLists"];
     }*/
 
     public DataObject(string name, string label) {
         properties["name"] = name;
         properties["label"] = label;
         properties["fields"] = DefaultFields();
-        //properties["relatedLists"] = new List<RelatedList>();
+        //properties["relatedLists"] = new List<RelatedRecords>();
     }
 
     public void Insert() {
@@ -48,7 +48,7 @@ public class DataObject {
         GameManager.Instance().DataManager().AddObject(this);
     }
 
-    public List<DataRecord> Records() {
+    public List<ObjectRecord> Records() {
         return GameManager.Instance().DataManager().RecordsByObject(Name());
     }
 }

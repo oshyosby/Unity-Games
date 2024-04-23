@@ -25,27 +25,27 @@ public class DataManager {
     }
 
     [SerializeField]
-    private List<DataRecord> records = new List<DataRecord>();
-    public List<DataRecord> AllRecords() {
+    private List<ObjectRecord> records = new List<ObjectRecord>();
+    public List<ObjectRecord> AllRecords() {
         return records;
     }
-    public List<DataRecord> RecordsByObject(string sobjectName) {
+    public List<ObjectRecord> RecordsByObject(string sobjectName) {
         return records.Where(x => x.DataObject().Name() == sobjectName).ToList();
     }
-    public DataRecord RecordById(string recordId) {
+    public ObjectRecord RecordById(string recordId) {
         if(!records.Any(x => x.Id() == recordId)) {
-            return (DataRecord)null;
+            return (ObjectRecord)null;
         }
         return records.First(x => x.Id() == recordId);
     }
-    public DataRecord RecordDataQuery(string dataObject, string field, object value) {
+    public ObjectRecord RecordDataQuery(string dataObject, string field, object value) {
         return RecordsByObject(dataObject).First(x => x.GetField(field) == value);
     }
-    public List<DataRecord> RecordsDataQuery(string dataObject, string field, object value) {
+    public List<ObjectRecord> RecordsDataQuery(string dataObject, string field, object value) {
         return RecordsByObject(dataObject).Where(x => x.GetField(field) == value).ToList();
     }
 
-    public void AddRecord(DataRecord record) {
+    public void AddRecord(ObjectRecord record) {
         if(record.Id() == "" || record.Id() == null || record.Id() == "undefined") {
             RecordId(record);
         }
@@ -53,13 +53,13 @@ public class DataManager {
         records.Add(record);
     }
 
-    private void GenerateId(DataRecord record) {
+    private void GenerateId(ObjectRecord record) {
         string id = Guid.NewGuid().ToString();
         string dataObject = record.DataObject().Name();
         id = dataObject + id.Substring(dataObject.Length+1);
         record.SetField("id",id);
     }
-    private void RecordId(DataRecord record) {
+    private void RecordId(ObjectRecord record) {
         GenerateId(record);
         while(records.Any(x => x.Id() == record.Id())) {
             GenerateId(record);

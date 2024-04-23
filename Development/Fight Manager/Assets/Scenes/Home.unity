@@ -2887,22 +2887,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSave:
     name: 
-    player:
-      id: 
-      firstName: 
-      lastName: 
-      location: 
-      roles: []
-      stats: []
-  saves:
-  - name: Test
-    player:
-      id: 
-      firstName: test
-      lastName: test
-      location: west
-      roles: []
-      stats: []
+    data:
+      sobjects: []
+      records: []
+  saves: []
 --- !u!4 &1219922227
 Transform:
   m_ObjectHideFlags: 0
@@ -3013,6 +3001,7 @@ MonoBehaviour:
     screens:
     - {fileID: 1715569374}
     - {fileID: 1225803684}
+    currentScreenName: 
 --- !u!1 &1276764386
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,18 +3620,15 @@ MonoBehaviour:
   screenManager:
     screens:
     - {fileID: 1715569374}
+    currentScreenName: 
   buttonManager:
     buttons:
     - {fileID: 901580157}
   selectedSave:
     name: 
-    player:
-      id: 
-      firstName: 
-      lastName: 
-      location: 
-      roles: []
-      stats: []
+    data:
+      sobjects: []
+      records: []
 --- !u!114 &1381840605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4296,6 +4282,7 @@ MonoBehaviour:
     - {fileID: 1715569374}
     - {fileID: 1225803684}
     - {fileID: 1381840602}
+    currentScreenName: Hone
   buttonManager:
     buttons:
     - {fileID: 705432209}
