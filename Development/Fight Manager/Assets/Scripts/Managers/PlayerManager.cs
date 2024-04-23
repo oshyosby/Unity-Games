@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
 public class PlayerManager {
-    public Person player;
+    public DataRecord player;
+    [SerializeField]
     public DataManager dataManager = new DataManager();
 
-    public Gym MyGym() {
-        List<Record> gyms = dataManager.RecordsByType("gym");
-        Debug.Log("Number Of Gyms: "+gyms.Count);
-        Record record = dataManager.RecordDataQuery(gyms,"ownerId",(object)player.id); 
-        Debug.Log("My Gym Id: "+record.id);
-        return Gym.Get(record);
+    public DataRecord MyGym() {
+        DataRecord record = dataManager.RecordDataQuery("organisation","ownerId",player.Id()); 
+        Debug.Log("My Gym Id: "+record.Id());
+        return record;
     }
 
     public PlayerManager() {}
 
-    public PlayerManager(Person player, DataManager dataManager) {
+    public PlayerManager(DataRecord player, DataManager dataManager) {
         this.player = player;
         this.dataManager = dataManager;
     }

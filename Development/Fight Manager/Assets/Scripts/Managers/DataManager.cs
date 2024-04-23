@@ -5,58 +5,63 @@ using UnityEngine;
 
 [Serializable]
 public class DataManager {
-    private List<SObject> sobjects = new List<SObject>();
-    public List<SObject> AllSObjects() {
+
+    [SerializeField]
+    private List<DataObject> sobjects = new List<DataObject>();
+    public List<DataObject> AllObjects() {
         return sobjects;
     }
-    public SObject SObjectByName(string name) {
+    public DataObject ObjectByName(string name) {
         if(!sobjects.Any(x => x.Name() == name)) {
-            return (SObject)null;
+            return (DataObject)null;
         }
         return sobjects.First(x => x.Name() == name);
     }
-    public void AddSObject(SObject sobject) {
+    public void AddObject(DataObject sobject) {
         if(sobjects.Any(x => x.Name() == sobject.Name())) {
             return;
         }
         sobjects.Add(sobject);
     }
 
-    private List<Record> records = new List<Record>();
-    public List<Record> AllRecords() {
+    [SerializeField]
+    private List<DataRecord> records = new List<DataRecord>();
+    public List<DataRecord> AllRecords() {
         return records;
     }
-    public List<Record> RecordsBySObject(string sobjectName) {
-        return records.Where(x => x.SObject().Name() == sobjectName).ToList();
+    public List<DataRecord> RecordsByObject(string sobjectName) {
+        return records.Where(x => x.DataObject().Name() == sobjectName).ToList();
     }
-    public Record RecordById(string recordId) {
+    public DataRecord RecordById(string recordId) {
         if(!records.Any(x => x.Id() == recordId)) {
-            return (Record)null;
+            return (DataRecord)null;
         }
         return records.First(x => x.Id() == recordId);
     }
-    public Record RecordFieldQuery(string sobject, string field, object value) {
-        return RecordsBySObject(sobject).First(x => x.data[field] == value);
+    public DataRecord RecordDataQuery(string dataObject, string field, object value) {
+        return RecordsByObject(dataObject).First(x => x.GetField(field) == value);
     }
-    public List<Record> RecordsFieldQuery(string sobject, string field, object value) {
-        return RecordsBySObject(sobject).Where(x => x.data[field] == value).ToList();
+    public List<DataRecord> RecordsDataQuery(string dataObject, string field, object value) {
+        return RecordsByObject(dataObject).Where(x => x.GetField(field) == value).ToList();
     }
 
-    public void AddRecord(Record record) {
-        if(record.id == "" || record.id == null || record.id == "undefined") {
+    public void AddRecord(DataRecord record) {
+        if(record.Id() == "" || record.Id() == null || record.Id() == "undefined") {
             RecordId(record);
         }
-        Debug.Log("Record Id: "+record.id);
+        Debug.Log("Record Id: "+record.Id());
         records.Add(record);
     }
 
-    private void GenerateId(Record record) {
-        record.id = Guid.NewGuid().ToString();
-        record.id = record.type + record.id.Substring(record.type.Length+1);
+    private void GenerateId(DataRecord record) {
+        string id = Guid.NewGuid().ToString();
+        string dataObject = record.DataObject().Name();
+        id = dataObject + id.Substring(dataObject.Length+1);
+        record.SetField("id",id);
     }
-    private void RecordId(Record record) {
+    private void RecordId(DataRecord record) {
         GenerateId(record);
-        while(records.Any(x => x.id == record.id)) {
+        while(records.Any(x => x.Id() == record.Id())) {
             GenerateId(record);
         }
     }

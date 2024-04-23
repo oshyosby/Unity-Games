@@ -93,18 +93,27 @@ public class NewGameController : MonoBehaviour
 
     public void Submit() {
         Debug.Log("Submit");
-        Person player = new Person(
-            GetInputByName("firstName").GetValue(),
-            GetInputByName("lastName").GetValue(),
-            GetInputByName("location").GetValue(),
-            "Coach",
-            GetStats()
+        Dictionary<string,object> personFields = new Dictionary<string,object>{
+            {"firstName",GetInputByName("firstName").GetValue()},
+            {"lastName",GetInputByName("lastName").GetValue()},
+            //{"location",GetInputByName("location").GetValue()},
+            //{"roles",new List<string>{"Coach"}},
+            //{"stats",GetStats()}
+        };
+        string name = personFields["firstName"]+" "+personFields["lastName"];
+        DataRecord player = new DataRecord(
+            name,
+            "individual",
+            personFields
         );
         player.Push();
-        Gym gym = new Gym("Test Gym Creation",player.id);
+        Dictionary<string,object> orgnaisationFields = new Dictionary<string,object>{
+            {"ownerId",player.Id()}
+        };
+        DataRecord gym = new DataRecord("Test Gym Creation","organisation",orgnaisationFields);
         gym.Push();
         GameManager.Instance().playerManager.player = player;
-        GameManager.Instance().Save(player.FullName());
+        GameManager.Instance().Save(player.Name());
         GameManager.LoadScene("Game");
     }
 }

@@ -1,17 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class HomeController : MonoBehaviour
 {
     public ScreenManager screenManager;
     public ButtonManager buttonManager;
 
-    void Awake() {
-        if(GameManager.Instance().currentSave == null) {
-            buttonManager.GetButtonByName("Resume").GetComponent<Button>().interactable = false;
-        }
+    void Update() {
         if(GameManager.Instance().saves.Count == 0) {
+            buttonManager.GetButtonByName("Resume").GetComponent<Button>().interactable = false;
             buttonManager.GetButtonByName("Load Game").GetComponent<Button>().interactable = false;
         }
     }
