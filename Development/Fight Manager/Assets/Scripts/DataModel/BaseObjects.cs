@@ -37,8 +37,8 @@ public static class BaseObjects {
         Debug.Log("Build Affiliation Object");
         DataObject dataObject = new DataObject("affiliation","Affiliation");
         List<ObjectField> fields = new List<ObjectField>(){
-            ObjectField.Lookup("individual","Individual Id",true,(string)(""),"individual","affiliations","Affiliated Organisations"),
-            ObjectField.Lookup("organisation","Organisation Id",true,(string)(""),"organisation","affiliations","Affiliated Individuals")
+            ObjectField.Lookup("individualId","Individual Id",true,(string)(""),"individual","affiliations","Affiliated Organisations"),
+            ObjectField.Lookup("organisationId","Organisation Id",true,(string)(""),"organisation","affiliations","Affiliated Individuals")
         };
         dataObject.AddFields(fields);
         return dataObject;

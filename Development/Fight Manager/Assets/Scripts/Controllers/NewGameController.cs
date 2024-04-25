@@ -110,9 +110,10 @@ public class NewGameController : MonoBehaviour
         ObjectRecord gym = new ObjectRecord("Test Gym Creation","organisation",new Dictionary<string,object>());
         gym.Push();
         Dictionary<string,object> affiliationFields = new Dictionary<string,object>{
-            {"individualId",player.Id()},{"orgnaisationId",gym.Id()}
+            {"individualId",player.Id()},{"organisationId",gym.Id()}
         };
-        ObjectRecord affiliation = new ObjectRecord("Affiliation","affiliation",affiliationFields);
+        Debug.Log($"Affiliation Field Values for insertion: {(string)affiliationFields["organisationId"]}");
+        ObjectRecord affiliation = new ObjectRecord("Affiliation Test","affiliation",affiliationFields);
         affiliation.Push();
         GameManager.Instance().playerManager.player = player;
         GameManager.Instance().Save(player.Name());

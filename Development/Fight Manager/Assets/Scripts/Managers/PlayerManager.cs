@@ -10,9 +10,13 @@ public class PlayerManager {
     public DataManager dataManager = new DataManager();
 
     public ObjectRecord MyGym() {
-        ObjectRecord record = dataManager.RecordDataQuery("organisation","ownerId",player.Id()); 
-        Debug.Log("My Gym Id: "+record.Id());
-        return record;
+        ObjectRecord affiliation = dataManager.RecordDataQuery("affiliation","individualId",player.Id());
+        Debug.Log("Affiliation Id: "+affiliation.Id());
+        string organisationId = (string)affiliation.GetField("organisationId");
+        Debug.Log("Gym Id: "+organisationId);
+        ObjectRecord gym = dataManager.RecordById(organisationId); 
+        Debug.Log("Gym Name: "+gym.Name());
+        return gym;
     }
 
     public PlayerManager() {}
