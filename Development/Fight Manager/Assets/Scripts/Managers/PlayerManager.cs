@@ -10,7 +10,8 @@ public class PlayerManager {
     public DataManager dataManager = new DataManager();
 
     public ObjectRecord MyGym() {
-        ObjectRecord affiliation = dataManager.RecordDataQuery("affiliation","individualId",player.Id());
+        List<ObjectRecord> affiliations = player.GetRelatedList("affiliations");
+        ObjectRecord affiliation = affiliations[0];
         Debug.Log("Affiliation Id: "+affiliation.Id());
         string organisationId = (string)affiliation.GetField("organisationId");
         Debug.Log("Gym Id: "+organisationId);

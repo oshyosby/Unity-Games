@@ -15,8 +15,8 @@ public class DataObject {
     }
     private Dictionary<string,object> properties = new Dictionary<string, object>{
         {"name",(string)("")},{"label",(string)("")},
-        {"fields",new List<ObjectField>()}
-        //{"relatedLists",new List<RelatedRecords>()}
+        {"fields",new List<ObjectField>()},
+        {"relatedLists",new List<RelatedRecords>()}
     };
 
     public string Name() {
@@ -35,16 +35,19 @@ public class DataObject {
         Debug.Log("Add Object Fields");
         Fields().AddRange(fields);
     }
-    /*
-    public List<RelatedRecords> RelatedRecordss() {
+    public List<RelatedRecords> RelatedLists() {
         return (List<RelatedRecords>)properties["relatedLists"];
-    }*/
+    }
+    public void AddRelatedLists(List<RelatedRecords> lists) {
+        Debug.Log("Add Related Lists");
+        RelatedLists().AddRange(lists);
+    }
 
     public DataObject(string name, string label) {
         properties["name"] = name;
         properties["label"] = label;
         properties["fields"] = DefaultFields();
-        //properties["relatedLists"] = new List<RelatedRecords>();
+        properties["relatedLists"] = new List<RelatedRecords>();
     }
 
     public void Insert() {

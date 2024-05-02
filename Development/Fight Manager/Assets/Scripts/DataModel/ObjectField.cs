@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class ObjectField {
@@ -41,10 +42,13 @@ public class ObjectField {
     public static ObjectField Bool(string name, string label, bool isRequired, bool defaultValue) {
         return new ObjectField(name,label,"bool",isRequired,(bool)defaultValue);
     }
-    public static ObjectField Lookup(string name, string label, bool isRequired, string defaultValue, string dataObject, string listName, string listLabel) {
+    public static ObjectField Lookup(string name, string label, bool isRequired, string defaultValue, string childObject, string parentObject, string listName, string listLabel) {
         ObjectField field = new ObjectField(name,label,"lookup",isRequired,(string)defaultValue);
-        //RelatedRecords list = new RelatedRecords(dataObject,listName,listLabel);
-        // Add Related list to DataObject
+        RelatedRecords list = new RelatedRecords(listName,listLabel,childObject,name);
+        Debug.Log($"Parent Object Name: {parentObject}");   
+        DataObject dataObject = GameManager.Instance().DataManager().ObjectByName(parentObject);
+        Debug.Log($"Data Object Name: {dataObject.Name()}");
+        dataObject.AddRelatedLists(new List<RelatedRecords>{list});
         return field;
     }
 }

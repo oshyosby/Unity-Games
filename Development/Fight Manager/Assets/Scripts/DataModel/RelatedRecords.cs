@@ -21,10 +21,11 @@ public class RelatedRecords {
         return DataObject().Fields().First(x => x.Name() == (string)properties["field"]);
     }
 
-    public RelatedRecords(string name, string label, string dataObject) {
+    public RelatedRecords(string name, string label, string dataObject, string field) {
         properties["name"] = name;
         properties["label"] = label;
         properties["dataObject"] = dataObject;
+        properties["field"] = field;
     }
 
     public List<ObjectRecord> Records(string recordId) {

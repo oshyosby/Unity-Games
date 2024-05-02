@@ -10,35 +10,29 @@ public static class BaseObjects {
         };
     }
 
-    private static DataObject Individual() {
+    public static DataObject Individual() {
         Debug.Log("Build Individual Object");
         DataObject dataObject = new DataObject("individual","Individual");
         List<ObjectField> fields = new List<ObjectField>(){
             ObjectField.String("firstName","First Name",true,(string)("")),
-            ObjectField.String("lastName","Last Name",true,(string)("")),
-            //ObjectField.String("location","Location",true,(string)("")),
+            ObjectField.String("lastName","Last Name",true,(string)(""))
         };
         dataObject.AddFields(fields);
         return dataObject;
     }
 
-    private static DataObject Organisation() {
+    public static DataObject Organisation() {
         Debug.Log("Build Organisation Object");
         DataObject dataObject = new DataObject("organisation","Organisation");
-        /*
-        List<ObjectField> fields = new List<ObjectField>(){
-            ObjectField.Lookup("ownerId","Owner Id",true,(string)(""),"individual","myOrgs","My Organisations")
-        };
-        dataObject.AddFields(fields);*/
         return dataObject;
     }
 
-    private static DataObject Affiliation() {
+    public static DataObject Affiliation() {
         Debug.Log("Build Affiliation Object");
         DataObject dataObject = new DataObject("affiliation","Affiliation");
         List<ObjectField> fields = new List<ObjectField>(){
-            ObjectField.Lookup("individualId","Individual Id",true,(string)(""),"individual","affiliations","Affiliated Organisations"),
-            ObjectField.Lookup("organisationId","Organisation Id",true,(string)(""),"organisation","affiliations","Affiliated Individuals")
+            ObjectField.Lookup("individualId","Individual Id",true,(string)(""),"affiliation","individual","affiliations","Affiliated Organisations"),
+            ObjectField.Lookup("organisationId","Organisation Id",true,(string)(""),"affiliation","organisation","affiliations","Affiliated Individuals")
         };
         dataObject.AddFields(fields);
         return dataObject;

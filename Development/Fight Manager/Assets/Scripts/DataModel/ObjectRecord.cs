@@ -46,6 +46,14 @@ public class ObjectRecord {
         return (DataObject)GameManager.Instance().DataManager().ObjectByName((string)GetField("dataObject"));
     }
 
+    public List<ObjectRecord> GetRelatedList(string name) {
+        RelatedRecords list = DataObject().RelatedLists().FirstOrDefault(x => x.Name() == name);
+        if(list == null) {
+            return new List<ObjectRecord>();
+        }
+        return list.Records(Id());
+    }
+
     public ObjectRecord(string name, string dataObject, Dictionary<string,object> fields) {
         SetDefaultFields(dataObject);
         Fields()["name"] = name;

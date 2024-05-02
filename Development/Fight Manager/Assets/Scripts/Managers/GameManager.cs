@@ -20,8 +20,9 @@ public class GameManager : MonoBehaviour
             if(saves.Count > 0) {
                 LoadSave(saves.OrderByDescending(x => x.lastModifiedDate).ToArray()[0]);
             } else {
-                List<DataObject> dataObjects = BaseObjects.Collection();
-                dataObjects.ForEach(dataObject => dataObject.Insert());
+                BaseObjects.Individual().Insert();
+                BaseObjects.Organisation().Insert();
+                BaseObjects.Affiliation().Insert();
             }
         }
         else
