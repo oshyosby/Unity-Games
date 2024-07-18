@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\o.shanagher\\Documents\\Personal\\Unity-Games\\Test Area\\Test Area.csproj": {}
+    "C:\\Users\\oscar\\Documents\\Development\\Unity Games\\Base\\Base.csproj": {}
   },
   "projects": {
-    "C:\\Users\\o.shanagher\\Documents\\Personal\\Unity-Games\\Test Area\\Test Area.csproj": {
+    "C:\\Users\\oscar\\Documents\\Development\\Unity Games\\Base\\Base.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\o.shanagher\\Documents\\Personal\\Unity-Games\\Test Area\\Test Area.csproj",
-        "projectName": "Test Area",
-        "projectPath": "C:\\Users\\o.shanagher\\Documents\\Personal\\Unity-Games\\Test Area\\Test Area.csproj",
-        "packagesPath": "C:\\Users\\o.shanagher\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\o.shanagher\\Documents\\Personal\\Unity-Games\\Test Area\\obj\\",
+        "projectUniqueName": "C:\\Users\\oscar\\Documents\\Development\\Unity Games\\Base\\Base.csproj",
+        "projectName": "Base",
+        "projectPath": "C:\\Users\\oscar\\Documents\\Development\\Unity Games\\Base\\Base.csproj",
+        "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oscar\\Documents\\Development\\Unity Games\\Base\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\o.shanagher\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
