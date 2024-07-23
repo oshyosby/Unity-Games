@@ -1,6 +1,6 @@
 // Script Object Field
 
-namespace SData;
+namespace Framework;
 public class Field {
     private string _name;
     public string Name() {
@@ -24,5 +24,12 @@ public class Field {
         _label = label;
         _type = type;
         _required = isRequired;
+    }
+
+    public void Insert(SObject sObject) {
+        if (sObject == null) {
+            return;
+        }
+        sObject.NewField(this);
     }
 }

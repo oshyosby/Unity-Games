@@ -1,6 +1,6 @@
 // Script Object
 
-namespace SData;
+namespace Framework;
 public class SObject {
 
     private static List<Field> defaultFields = new List<Field>{
@@ -25,6 +25,14 @@ public class SObject {
         _label = label;
     }
 
+    private string _prefix;
+    public string Prefix() {
+        return _prefix;
+    } 
+    public void SetPrefix(string prefix) {
+        _prefix = prefix;
+    }
+
     private List<Field> _fields;
     public List<Field> Fields() {
         return _fields;
@@ -37,24 +45,24 @@ public class SObject {
             return null;
         }
     }
+    public void NewField(Field field) {
+        _fields.Add(field);
+    }
+    public void NewFields(List<Field> fields) {
+        _fields.AddRange(fields);
+    }
 
-    public SObject(string name, string label) {
+    public SObject(string name, string label, string prefix) {
         _name = name;
         _label = label;
         _fields = defaultFields;
+        _prefix = prefix;
     }
 
     public void Insert() {
         SDataModel.Instance().AddSObject(this);
     }
 
-    private List<Record> _records = new List<Record>();
-    public List<Record> GetRecords() {
-        return _records;
-    }
-    public void AddRecord(Record record) {
-        _records.Add(record);
-    }
     public Record NewRecord() {
         return new Record(this);
     }
