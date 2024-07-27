@@ -1,5 +1,5 @@
-using Framework;
 
+namespace Framework;
 public class GuidGenerator {
     private static string BaseGuid() {
         return Guid.NewGuid().ToString();
@@ -10,21 +10,21 @@ public class GuidGenerator {
     }
 
     private static bool UniqueRecordGuid(string recordId) {
-        return SDataModel.Instance().GetRecords().Any(x => x.Id() == recordId) ? false : true;
+        return Game.Instance.SDataModel.Records.Any(x => x.Id == recordId) ? false : true;
     }
 
     private static string GetPrefix(string sObjectName) {
-        var sObject = SDataModel.Instance().GetSObjectByName(sObjectName);
+        var sObject = Game.Instance.SDataModel.GetSObjectByName(sObjectName);
         return sObject != null ? sObject.Prefix() : "";
     }
 
     public static void SetRecordId(Record record) {
         bool isGenerated = false;
-        string recordId = record.Id();
+        string recordId = record.Id;
         while(isGenerated == false) {
-            recordId = FormattedGuid(BaseGuid(),GetPrefix(record.SObjectName()));
+            recordId = FormattedGuid(BaseGuid(),GetPrefix(record.SObjectName));
             isGenerated = UniqueRecordGuid(recordId);
         }
-        record.SetDataValueByField("id",recordId); 
+        record.Id = recordId; 
     }
 }

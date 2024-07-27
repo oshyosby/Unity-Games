@@ -60,7 +60,7 @@ public class SObject {
     }
 
     public void Insert() {
-        SDataModel.Instance().AddSObject(this);
+        Game.Instance.SDataModel.AddSObject(this);
     }
 
     public Record NewRecord() {

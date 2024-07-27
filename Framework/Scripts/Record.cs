@@ -21,18 +21,35 @@ public class Record {
     public void SetDataValueByField(string field, object value) {
         _data[field] = value;
     }
-    public string Id() {
-        return (string)GetDataByField("id");
+
+    public string Id {
+        get {
+            return (string)GetDataByField("id");
+        }
+        set {
+            SetDataValueByField("id", value);
+        }
     }
-    public string Name() {
-        return (string)GetDataByField("name");
+    public string Name {
+        get {
+            return (string)GetDataByField("name");
+        }
+        set {
+            SetDataValueByField("name",value);
+        }
     }
-    public string SObjectName() {
-        return (string)GetDataByField("sObjectName");
+
+    public string SObjectName {
+        get {
+            return (string)GetDataByField("sObjectName");
+        }
+        set {
+            SetDataValueByField("sObjectName",value);
+        }
     }
 
     public void Insert() {
-        if(!string.IsNullOrEmpty(Id())) {return;}
-        SDataModel.Instance().AddRecord(this);
+        if(!string.IsNullOrEmpty(Id)) {return;}
+        Game.Instance.SDataModel.AddRecord(this);
     }
 }
