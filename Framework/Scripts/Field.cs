@@ -3,20 +3,28 @@
 namespace Framework;
 public class Field {
     private string _name;
-    public string Name() {
-        return _name;
+    public string Name {
+        get {
+            return _name;
+        }
     }
     private string _label;
-    public string Label() {
-        return _label;
+    public string Label {
+        get {
+            return _label;
+        }
     }
     private string _type;
-    public string Type() {
-        return _type;
+    public string Type {
+        get {
+            return _type;
+        }
     }
     private bool _required;
-    public bool Required() {
-        return _required;
+    public bool Required {
+        get {
+            return _required;
+        }
     }
 
     public Field(string name, string label, string type, bool isRequired) {

@@ -8,43 +8,73 @@ public class Record {
         return _data;
     }
     
-    public Record(SObject sObject) {
-        _data = new Dictionary<string,object>();
-        foreach(Field field in sObject.Fields()) {
-            _data.Add(field.Name(),field.Name() == "sObjectName" ? sObject.Name() : "");
+    public Record(Dictionary<string,object> fieldValues) {
+        _data = fieldValues;
+    }
+    
+    public object this[string fieldName] {
+        get {
+            if(_data.ContainsKey(fieldName)) {
+                return _data[fieldName];
+            } else {
+                throw new Exception($"Field named {fieldName} not found");
+            }
+        }
+        set {
+            if(_data.ContainsKey(fieldName)) {
+                _data[fieldName] = value;
+            } else {
+                _data.Add(fieldName, value);
+            }
         }
     }
     
-    public object GetDataByField(string field) {
-        return _data[field];
-    }
-    public void SetDataValueByField(string field, object value) {
-        _data[field] = value;
+    public Dictionary<string,object> this[List<string> fieldNames] {
+        get {
+            Dictionary<string,object> result = new Dictionary<string,object>();
+            foreach(string fieldName in fieldNames) {
+                if(_data.ContainsKey(fieldName)) {
+                    result.Add(fieldName,_data[fieldName]);
+                } else {
+                    throw new Exception($"Field named {fieldName} not found");
+                }
+            }
+            return result;
+        }
+        set {
+            foreach(string fieldName in fieldNames) {
+                if(_data.ContainsKey(fieldName)) {
+                    _data[fieldName] = value[fieldName];
+                } else {
+                    _data.Add(fieldName, value[fieldName]);
+                }
+            }
+        }
     }
 
     public string Id {
         get {
-            return (string)GetDataByField("id");
+            return (string)this["id"];
         }
         set {
-            SetDataValueByField("id", value);
+            this["id"] = value;
         }
     }
     public string Name {
         get {
-            return (string)GetDataByField("name");
+            return (string)this["name"];
         }
         set {
-            SetDataValueByField("name",value);
+            this["name"] = value;
         }
     }
 
     public string SObjectName {
         get {
-            return (string)GetDataByField("sObjectName");
+            return (string)this["sObjectName"];
         }
         set {
-            SetDataValueByField("sObjectName",value);
+            this["sObjectName"] = value;
         }
     }
 

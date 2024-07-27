@@ -15,7 +15,7 @@ public class GuidGenerator {
 
     private static string GetPrefix(string sObjectName) {
         var sObject = Game.Instance.SDataModel.GetSObjectByName(sObjectName);
-        return sObject != null ? sObject.Prefix() : "";
+        return sObject != null ? sObject.Prefix : "";
     }
 
     public static void SetRecordId(Record record) {
