@@ -36,12 +36,9 @@ public class ObjectValidation {
 
     public bool Valid(ObjectRecord record) {
         // Check Logic against record
-        bool allCriteriaMet = criteria.All(item => {
-            Console.WriteLine(item);
-            return item(record);
+        bool allCriteriaMet = criteria.All(rule => {
+            return rule(record);
         });
-        Console.WriteLine($"Validation Passed: {allCriteriaMet}");
-
         return true;
     }
 }

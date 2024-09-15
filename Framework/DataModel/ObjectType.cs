@@ -16,13 +16,7 @@ public class ObjectType {
         this.description = description;
         this.fields = DEFAULT_FIELDS;
         if(fields != null) fields.ForEach(field => AddField(field));
-        if(validations == null) {
-            Console.WriteLine("No Validations Populated");
-            this.validations = new List<ObjectValidation>();
-        } else {
-            Console.WriteLine("Number of Validations Inserted: "+validations.Count);
-            this.validations = validations;
-        }
+        this.validations = validations ?? new List<ObjectValidation>();
     }
     
     private string? name;
@@ -116,7 +110,10 @@ public class ObjectType {
     private bool ValidateRecord(ObjectRecord newRecord, Dictionary<string,ObjectRecord>? oldRecordMap) {
         Dictionary<string,string> validationErrors;
         validationErrors = Validation(newRecord);
-        if(validationErrors.Count > 0) return false;
+        if(validationErrors.Count > 0) {
+            Console.WriteLine(JsonSerializer.Serialize(validationErrors));
+            return false;
+        } 
         return true;
     }
 
@@ -126,7 +123,6 @@ public class ObjectType {
             if(field.IsRequired && IsEmpty(record.Data[field.Name])) validationErrors.Add(field.Name,"Required Field Missing Value");
         });
         if(validationErrors.Count > 0) {
-            Console.WriteLine("Required Field Errors: "+JsonSerializer.Serialize(validationErrors));
             return validationErrors;
         }
         foreach(ObjectValidation validation in Validations) {

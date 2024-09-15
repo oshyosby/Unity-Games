@@ -2,10 +2,6 @@
 namespace DataModel;
 public static class User {
 
-    public static ObjectType Info = new ObjectType(
-        "user","User","User Information Object", Fields, ValidationRules
-    );
-
     private static List<ObjectField> Fields = new List<ObjectField>{
         new ObjectField("firstName", "First Name","User's First Name",typeof(string),true),
         new ObjectField("lastName", "Last Name","User's Last Name",typeof(string),true)
@@ -16,4 +12,8 @@ public static class User {
             record => (string)record["name"] != "oscar-shen"
         })
     };
+
+    public static ObjectType Info = new ObjectType(
+        "user","User","User Information Object", Fields, ValidationRules
+    );
 }
